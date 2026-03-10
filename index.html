@@ -7,14 +7,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #141414;
-            --bg-card: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
             --accent: #e63946;
             --accent-light: #ff6b6b;
             --gradient: linear-gradient(135deg, #e63946 0%, #ff8e53 100%);
+            --border: #e5e5e5;
         }
 
         * {
@@ -41,8 +42,9 @@
             left: 0;
             right: 0;
             z-index: 100;
-            background: rgba(10, 10, 10, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
         .logo {
@@ -87,7 +89,7 @@
             right: 0;
             width: 60%;
             height: 100%;
-            background: radial-gradient(circle at 70% 50%, rgba(230, 57, 70, 0.15) 0%, transparent 60%);
+            background: radial-gradient(circle at 70% 50%, rgba(230, 57, 70, 0.08) 0%, transparent 60%);
         }
 
         .hero-content {
@@ -202,11 +204,12 @@
             overflow: hidden;
             transition: all 0.4s ease;
             cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
         }
 
         .project-image {
@@ -294,16 +297,18 @@
 
         .skill-card {
             background: var(--bg-card);
-            border: 1px solid #333;
+            border: 1px solid var(--border);
             border-radius: 12px;
             padding: 1.5rem;
             text-align: center;
             transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         .skill-card:hover {
             border-color: var(--accent);
             transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         .skill-icon {
