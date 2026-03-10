@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "skills": {
+    "jimeng-t2i-i2i-image-generator": {
+      "name": "Jimeng-Image-Generater",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=jimeng-t2i-i2i-image-generator",
+      "source": "skillhub",
+      "version": "0.1.0"
+    },
+    "jimeng-video": {
+      "name": "Jimeng Video Generator",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=jimeng-video",
+      "source": "skillhub",
+      "version": "2.0.0"
+    },
+    "runware": {
+      "name": "Runware Image & Video generation",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=runware",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "computer-vision-expert": {
+      "name": "Computer Vision Expert",
+      "zip_url": "http://lightmake.site/api/v1/download?slug=computer-vision-expert",
+      "source": "skillhub",
+      "version": "1.0.0"
+    }
+  }
+}
