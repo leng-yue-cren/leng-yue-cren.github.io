@@ -3,23 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新闻日报 - Daily News</title>
+    <title>设计师作品集 | Design Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0d1117;
-            --bg-secondary: #161b22;
-            --bg-card: #21262d;
-            --border: #30363d;
-            --accent: #58a6ff;
-            --accent-hover: #79c0ff;
-            --text-primary: #f0f6fc;
-            --text-secondary: #8b949e;
-            --text-muted: #6e7681;
-            --hot: #f85149;
-            --tech: #a371f7;
-            --finance: #3fb950;
-            --sports: #f0883e;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-card: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent: #e63946;
+            --accent-light: #ff6b6b;
+            --gradient: linear-gradient(135deg, #e63946 0%, #ff8e53 100%);
         }
 
         * {
@@ -37,435 +32,583 @@
 
         /* Header */
         header {
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 2rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
         }
 
         .logo {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--text-primary);
         }
 
         .logo span {
             color: var(--accent);
         }
 
-        .date-display {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* Main Layout */
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: 1fr 320px;
+        nav {
+            display: flex;
             gap: 2rem;
         }
 
-        @media (max-width: 900px) {
-            main {
-                grid-template-columns: 1fr;
-            }
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
         }
 
-        /* News Sections */
-        .news-section {
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 50%, rgba(230, 57, 70, 0.15) 0%, transparent 60%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 .highlight {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 500px;
             margin-bottom: 2rem;
         }
 
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Portfolio Grid */
+        .portfolio {
+            padding: 4rem 5%;
+        }
+
         .section-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border);
+            margin-bottom: 3rem;
         }
-
-        .section-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-        }
-
-        .section-icon.hot { background: rgba(248, 81, 73, 0.2); }
-        .section-icon.tech { background: rgba(163, 113, 247, 0.2); }
-        .section-icon.finance { background: rgba(63, 185, 80, 0.2); }
-        .section-icon.sports { background: rgba(240, 136, 62, 0.2); }
 
         .section-title {
-            font-size: 1.1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
             font-weight: 600;
-        }
-
-        /* News Cards */
-        .news-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .news-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.25rem;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .news-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-
-        .news-title {
-            font-size: 1rem;
-            font-weight: 500;
             margin-bottom: 0.5rem;
-            color: var(--text-primary);
-            line-height: 1.5;
         }
 
-        .news-meta {
+        .section-subtitle {
+            color: var(--text-secondary);
+        }
+
+        .filter-buttons {
             display: flex;
             gap: 1rem;
-            font-size: 0.8rem;
-            color: var(--text-muted);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
-        .news-tag {
-            padding: 0.15rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 500;
-        }
-
-        .news-tag.hot { background: rgba(248, 81, 73, 0.15); color: var(--hot); }
-        .news-tag.tech { background: rgba(163, 113, 247, 0.15); color: var(--tech); }
-        .news-tag.finance { background: rgba(63, 185, 80, 0.15); color: var(--finance); }
-        .news-tag.sports { background: rgba(240, 136, 62, 0.15); color: var(--sports); }
-
-        /* Sidebar */
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .sidebar-card {
-            background: var(--bg-secondary);
+        .filter-btn {
+            padding: 0.6rem 1.5rem;
+            background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.25rem;
-        }
-
-        .sidebar-title {
-            font-size: 0.9rem;
-            font-weight: 600;
+            border-radius: 50px;
             color: var(--text-secondary);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .hot-search {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .hot-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.5rem;
-            border-radius: 8px;
-            transition: background 0.2s;
             cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
         }
 
-        .hot-item:hover {
-            background: var(--bg-card);
-        }
-
-        .hot-rank {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: 700;
-            background: var(--bg-card);
-        }
-
-        .hot-rank.top3 {
-            background: var(--hot);
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
             color: white;
         }
 
-        .hot-text {
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .project-image {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.5) 100%);
+        }
+
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .view-btn {
+            padding: 0.8rem 2rem;
+            background: white;
+            color: black;
+            border-radius: 50px;
+            font-weight: 600;
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover .view-btn {
+            transform: translateY(0);
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
             font-size: 0.9rem;
-            color: var(--text-primary);
+            color: var(--text-secondary);
+        }
+
+        /* Skills */
+        .skills {
+            padding: 4rem 5%;
+            background: var(--bg-secondary);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-level {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Contact */
+        .contact {
+            padding: 6rem 5%;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .email-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+        }
+
+        .email-btn:hover {
+            transform: scale(1.05);
         }
 
         /* Footer */
         footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
-            padding: 2rem;
+            padding: 2rem 5%;
             text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-top: 3rem;
-        }
-
-        /* Weather Widget */
-        .weather {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.5rem;
-        }
-
-        .weather-icon {
-            font-size: 2rem;
-        }
-
-        .weather-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .weather-temp {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .weather-desc {
-            font-size: 0.8rem;
             color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
         }
 
-        /* Quick Links */
-        .quick-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-stats {
+                gap: 1.5rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .quick-link {
-            padding: 0.4rem 0.8rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all 0.2s;
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .quick-link:hover {
-            border-color: var(--accent);
-            color: var(--accent);
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="header-content">
-            <div class="logo">新闻<span>日报</span></div>
-            <div class="date-display" id="currentDate"></div>
-        </div>
+        <div class="logo">DESIGN<span>.</span></div>
+        <nav>
+            <a href="#work">作品</a>
+            <a href="#skills">技能</a>
+            <a href="#contact">联系</a>
+        </nav>
     </header>
 
-    <main>
-        <div class="news-feed">
-            <!-- 热点新闻 -->
-            <div class="news-section">
-                <div class="section-header">
-                    <div class="section-icon hot">🔥</div>
-                    <h2 class="section-title">热点新闻</h2>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label animate">视觉设计师</div>
+            <h1 class="animate">
+                用设计讲述<br><span class="highlight">独特故事</span>
+            </h1>
+            <p class="animate">
+                专注于品牌设计、UI/UX设计、插画创作。致力于创造令人难忘的视觉体验。
+            </p>
+            <div class="hero-stats animate">
+                <div class="stat">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">年经验</div>
                 </div>
-                <div class="news-list">
-                    <div class="news-card">
-                        <div class="news-title">十四届全国人大四次会议闭幕 习近平签署主席令</div>
-                        <div class="news-meta">
-                            <span class="news-tag hot">热点</span>
-                            <span>人民日报</span>
-                            <span>10分钟前</span>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="news-title">生态环境法典草案亮相 为中国生态文明建设提供法治保障</div>
-                        <div class="news-meta">
-                            <span class="news-tag hot">热点</span>
-                            <span>新华社</span>
-                            <span>30分钟前</span>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="news-title">美军方确认将向台湾地区提供军援 外交部：坚决反对</div>
-                        <div class="news-meta">
-                            <span class="news-tag hot">热点</span>
-                            <span>环球时报</span>
-                            <span>1小时前</span>
-                        </div>
-                    </div>
+                <div class="stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">项目</div>
                 </div>
-            </div>
-
-            <!-- 科技要闻 -->
-            <div class="news-section">
-                <div class="section-header">
-                    <div class="section-icon tech">💻</div>
-                    <h2 class="section-title">科技要闻</h2>
-                </div>
-                <div class="news-list">
-                    <div class="news-card">
-                        <div class="news-title">OPPO Find N6 正式发布 搭载全新折叠屏技术</div>
-                        <div class="news-meta">
-                            <span class="news-tag tech">科技</span>
-                            <span>科技日报</span>
-                            <span>2小时前</span>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="news-title">一加15T 配置曝光 搭载骁龙8 Elite处理器</div>
-                        <div class="news-meta">
-                            <span class="news-tag tech">科技</span>
-                            <span>数码之家</span>
-                            <span>3小时前</span>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="news-title">英伟达发布新一代AI芯片 性能提升3倍</div>
-                        <div class="news-meta">
-                            <span class="news-tag tech">科技</span>
-                            <span>TechCrunch</span>
-                            <span>5小时前</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 财经资讯 -->
-            <div class="news-section">
-                <div class="section-header">
-                    <div class="section-icon finance">💰</div>
-                    <h2 class="section-title">财经资讯</h2>
-                </div>
-                <div class="news-list">
-                    <div class="news-card">
-                        <div class="news-title">蔚来发布2025年财报 四季度首次实现盈利</div>
-                        <div class="news-meta">
-                            <span class="news-tag finance">财经</span>
-                            <span>财经网</span>
-                            <span>今天</span>
-                        </div>
-                    </div>
-                    <div class="news-card">
-                        <div class="news-title">A股三大指数震荡上行 成交量突破万亿</div>
-                        <div class="news-meta">
-                            <span class="news-tag finance">财经</span>
-                            <span>证券时报</span>
-                            <span>今天</span>
-                        </div>
-                    </div>
+                <div class="stat">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">客户</div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <!-- 天气 -->
-            <div class="sidebar-card">
-                <div class="sidebar-title">今日天气</div>
-                <div class="weather">
-                    <div class="weather-icon">☀️</div>
-                    <div class="weather-info">
-                        <div class="weather-temp">22°C</div>
-                        <div class="weather-desc">上海 · 晴</div>
+    <section class="portfolio" id="work">
+        <div class="section-header">
+            <h2 class="section-title">精选作品</h2>
+            <p class="section-subtitle">代表作品集 · 点击查看详情</p>
+        </div>
+
+        <div class="filter-buttons">
+            <button class="filter-btn active">全部</button>
+            <button class="filter-btn">品牌设计</button>
+            <button class="filter-btn">UI/UX</button>
+            <button class="filter-btn">插画</button>
+            <button class="filter-btn">海报</button>
+        </div>
+
+        <div class="gallery">
+            <!-- 项目1 -->
+            <div class="project-card">
+                <div class="project-image">
+                    🎨
+                    <div class="project-overlay">
+                        <div class="view-btn">查看详情</div>
                     </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-category">品牌设计</div>
+                    <h3 class="project-title">科技公司品牌形象</h3>
+                    <p class="project-desc">Logo设计、VI系统、品牌视觉规范</p>
                 </div>
             </div>
 
-            <!-- 热搜榜 -->
-            <div class="sidebar-card">
-                <div class="sidebar-title">实时热搜</div>
-                <div class="hot-search">
-                    <div class="hot-item">
-                        <div class="hot-rank top3">1</div>
-                        <div class="hot-text">#十四届全国人大四次会议#</div>
+            <!-- 项目2 -->
+            <div class="project-card">
+                <div class="project-image">
+                    📱
+                    <div class="project-overlay">
+                        <div class="view-btn">查看详情</div>
                     </div>
-                    <div class="hot-item">
-                        <div class="hot-rank top3">2</div>
-                        <div class="hot-text">#OPPO Find N6#</div>
-                    </div>
-                    <div class="hot-item">
-                        <div class="hot-rank top3">3</div>
-                        <div class="hot-text">#蔚来盈利#</div>
-                    </div>
-                    <div class="hot-item">
-                        <div class="hot-rank">4</div>
-                        <div class="hot-text">#生态环境法典#</div>
-                    </div>
-                    <div class="hot-item">
-                        <div class="hot-rank">5</div>
-                        <div class="hot-text">#一加15T#</div>
-                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-category">UI/UX</div>
+                    <h3 class="project-title">移动APP设计</h3>
+                    <p class="project-desc">iOS/Android 设计规范与交互原型</p>
                 </div>
             </div>
 
-            <!-- 快捷入口 -->
-            <div class="sidebar-card">
-                <div class="sidebar-title">快捷入口</div>
-                <div class="quick-links">
-                    <a href="#" class="quick-link">微博</a>
-                    <a href="#" class="quick-link">知乎</a>
-                    <a href="#" class="quick-link">B站</a>
-                    <a href="#" class="quick-link">抖音</a>
-                    <a href="#" class="quick-link">今日头条</a>
-                    <a href="#" class="quick-link">腾讯新闻</a>
+            <!-- 项目3 -->
+            <div class="project-card">
+                <div class="project-image">
+                    🖼️
+                    <div class="project-overlay">
+                        <div class="view-btn">查看详情</div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-category">插画</div>
+                    <h3 class="project-title">商业插画系列</h3>
+                    <p class="project-desc">品牌插画、包装设计、吉祥物</p>
                 </div>
             </div>
-        </aside>
-    </main>
+
+            <!-- 项目4 -->
+            <div class="project-card">
+                <div class="project-image">
+                    📰
+                    <div class="project-overlay">
+                        <div class="view-btn">查看详情</div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-category">海报</div>
+                    <h3 class="project-title">音乐节海报</h3>
+                    <p class="project-desc">活动视觉、创意海报、展览设计</p>
+                </div>
+            </div>
+
+            <!-- 项目5 -->
+            <div class="project-card">
+                <div class="project-image">
+                    💻
+                    <div class="project-overlay">
+                        <div class="view-btn">查看详情</div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-category">UI/UX</div>
+                    <h3 class="project-title">仪表盘设计</h3>
+                    <p class="project-desc">数据可视化、管理后台、企业后台</p>
+                </div>
+            </div>
+
+            <!-- 项目6 -->
+            <div class="project-card">
+                <div class="project-image">
+                    ✨
+                    <div class="project-overlay">
+                        <div class="view-btn">查看详情</div>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <div class="project-category">品牌设计</div>
+                    <h3 class="project-title">餐饮品牌升级</h3>
+                    <p class="project-desc">品牌定位、视觉设计、空间导视</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills" id="skills">
+        <div class="section-header">
+            <h2 class="section-title">专业技能</h2>
+            <p class="section-subtitle">工具与专长</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">🎯</div>
+                <div class="skill-name">Figma</div>
+                <div class="skill-level">熟练掌握</div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">✏️</div>
+                <div class="skill-name">Adobe Illustrator</div>
+                <div class="skill-level">熟练掌握</div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🖌️</div>
+                <div class="skill-name">Photoshop</div>
+                <div class="skill-level">熟练掌握</div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">📐</div>
+                <div class="skill-name">UI/UX 设计</div>
+                <div class="skill-level">专业</div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🎨</div>
+                <div class="skill-name">品牌设计</div>
+                <div class="skill-level">专业</div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">✍️</div>
+                <div class="skill-name">手绘插画</div>
+                <div class="skill-level">精通</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2>一起创造精彩</h2>
+        <p>有项目合作或其他咨询，欢迎联系我</p>
+        <a href="mailto:your@email.com" class="email-btn">
+            📧 联系我
+        </a>
+    </section>
 
     <footer>
-        <p>© 2026 新闻日报 Daily News · 每天早8点更新</p>
+        <p>© 2026 Design Portfolio. All rights reserved.</p>
     </footer>
 
     <script>
-        // 设置日期
-        const now = new Date();
-        const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
-        document.getElementById('currentDate').textContent = now.toLocaleDateString('zh-CN', options);
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
     </script>
 </body>
 </html>
