@@ -376,7 +376,7 @@
             color: var(--text-secondary);
         }
 
-        /* Modal */
+        /* Modal - 高级弹窗 */
         .modal {
             display: none;
             position: fixed;
@@ -385,6 +385,7 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            perspective: 1000px;
         }
 
         .modal.active {
@@ -394,63 +395,191 @@
         .modal-backdrop {
             position: absolute;
             inset: 0;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(20px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal-content {
             position: relative;
-            background: var(--bg-card);
-            border-radius: 24px;
-            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            max-width: 900px;
             width: 100%;
             max-height: 90vh;
-            overflow-y: auto;
-            transform: scale(0.9);
+            overflow: hidden;
+            transform: scale(0.8) rotateX(10deg);
             opacity: 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 25px 80px rgba(0,0,0,0.2),
+                0 0 1px rgba(255,255,255,0.5) inset;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
         .modal.active .modal-content {
-            transform: scale(1);
+            transform: scale(1) rotateX(0deg);
             opacity: 1;
         }
 
         .modal-image {
             width: 100%;
-            aspect-ratio: 16/9;
+            aspect-ratio: 21/9;
             background: var(--gradient);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 6rem;
+            font-size: 8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, 
+                transparent 0%, 
+                rgba(255,255,255,0.1) 50%,
+                rgba(0,0,0,0.3) 100%);
+        }
+
+        .modal-image span {
+            position: relative;
+            z-index: 1;
+            animation: zoomIn 0.5s ease 0.2s both;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .modal-body {
-            padding: 2rem;
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .modal-body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 2.5rem;
+            right: 2.5rem;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
         }
 
         .modal-close {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            width: 40px;
-            height: 40px;
+            top: 1.2rem;
+            right: 1.2rem;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            background: white;
+            background: rgba(255,255,255,0.9);
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
+            transition: all 0.3s;
             z-index: 10;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .modal-close:hover {
-            transform: rotate(90deg);
+            transform: rotate(90deg) scale(1.1);
+            background: var(--accent);
+            color: white;
+        }
+
+        /* 详情标签 */
+        .modal-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-tag {
+            padding: 0.4rem 1rem;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        /* 项目详情内容 */
+        .modal-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .modal-detail-item h4 {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-detail-item p {
+            font-size: 1rem;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* 底部按钮 */
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .modal-btn-primary {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 20px rgba(230, 57, 70, 0.3);
+        }
+
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(230, 57, 70, 0.4);
+        }
+
+        .modal-btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .modal-btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         /* Skills */
@@ -715,16 +844,46 @@
         </div>
     </section>
 
-    <!-- Modal -->
+    <!-- Modal - 高级项目详情弹窗 -->
     <div class="modal" id="projectModal">
         <div class="modal-backdrop" onclick="closeModal()"></div>
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">×</button>
-            <div class="modal-image" id="modalIcon"></div>
+            <div class="modal-image" id="modalIcon">
+                <span></span>
+            </div>
             <div class="modal-body">
-                <div class="project-category" id="modalCategory"></div>
+                <div class="modal-tags">
+                    <span class="modal-tag" id="modalCategoryTag"></span>
+                    <span class="modal-tag">2025</span>
+                    <span class="modal-tag">已完成</span>
+                </div>
                 <h2 class="project-title" id="modalTitle" style="font-size: 1.8rem; margin: 0.5rem 0 1rem;"></h2>
                 <p class="project-desc" id="modalDesc" style="font-size: 1rem; line-height: 1.8;"></p>
+                
+                <div class="modal-detail">
+                    <div class="modal-detail-item">
+                        <h4>客户</h4>
+                        <p id="modalClient">某知名企业</p>
+                    </div>
+                    <div class="modal-detail-item">
+                        <h4>服务内容</h4>
+                        <p id="modalService">品牌设计 / UI设计</p>
+                    </div>
+                    <div class="modal-detail-item">
+                        <h4>时间</h4>
+                        <p>2025年</p>
+                    </div>
+                    <div class="modal-detail-item">
+                        <h4>状态</h4>
+                        <p>已上线</p>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="modal-btn modal-btn-secondary" onclick="closeModal()">关闭</button>
+                    <button class="modal-btn modal-btn-primary">查看原型 →</button>
+                </div>
             </div>
         </div>
     </div>
@@ -824,8 +983,8 @@
                 const title = card.dataset.title;
                 const desc = card.dataset.desc;
 
-                document.getElementById('modalIcon').textContent = icon;
-                document.getElementById('modalCategory').textContent = category;
+                document.getElementById('modalIcon').querySelector('span').textContent = icon;
+                document.getElementById('modalCategoryTag').textContent = category;
                 document.getElementById('modalTitle').textContent = title;
                 document.getElementById('modalDesc').textContent = desc;
 
